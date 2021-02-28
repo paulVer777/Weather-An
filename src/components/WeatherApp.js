@@ -16,7 +16,8 @@ import "../main.css";
 
 class WeatherApp extends Component {
   state = {
-    text: ""
+    text: "",
+    interval:null
   };
 
   onChangeInput = e => {
@@ -27,14 +28,16 @@ class WeatherApp extends Component {
     const { activeCity } = this.props;
 
     if (prevProps.activeCity !== activeCity) {
-      clearInterval(this.interval);
+      clearInterval(this.state.interval);
 
       if (activeCity) {
         this.getWeather(activeCity.name);
 
-        this.interval = setInterval(() => {
+        const interval = setInterval(() => {
           this.getWeather(activeCity.name);
         }, 10000);
+
+        this.setState({interval})
       };
     };
   };
@@ -43,7 +46,7 @@ class WeatherApp extends Component {
     fetchData(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${AAPID}`)
       .then(res => this.props.setWeather(res))
       .catch(res => {
-        clearInterval(this.interval);
+        clearInterval(this.state.interval);
         this.props.setWeather(null);
         res.then(res => alert(res.message));
       });
@@ -71,17 +74,17 @@ class WeatherApp extends Component {
     this.setState({ text: "" });
   };
 
-  onChangeRadio = city => event => {
+  onChangeRadio = city => () => {
     this.props.setActiveCity(city);
   };
 
-  onDeleteCity = city => event => {
+  onDeleteCity = city => () => {
     const { activeCity, deleteCity, setWeather } = this.props;
 
     const isActiveCityBeingDeleted = activeCity && (city.id === activeCity.id);
 
     if (isActiveCityBeingDeleted) {
-      clearInterval(this.interval)
+      clearInterval(this.state.interval)
       setWeather(null);
     };
 
@@ -89,7 +92,7 @@ class WeatherApp extends Component {
   };
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.state.interval);
   };
 
   render() {
