@@ -1,3 +1,9 @@
-To run a project type:
-npm install 
+## Start new project
+```
+npm install
+```
+
+## Run & watch 
+```
 npm start
+```
