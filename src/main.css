@@ -1,0 +1,31 @@
+.weather-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather__headline{
+    letter-spacing: 5px;
+    color:green;
+}
+
+.weather__city-list{
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.weather__city-list-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather__city-list-item:not(:last-child){
+   margin-bottom: 30px;
+}
+
+.weather__weather-dipslay{
+    margin-top: 40px;
+ }
