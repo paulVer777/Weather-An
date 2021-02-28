@@ -8,7 +8,7 @@ import { Button } from "./elements/Button";
 import { addCity, removeCity, setActiveCity } from "../actions/cities";
 import { setWeather } from "../actions/weather";
 
-import WeatherDisplay from "./weatherDIsplay/weatherDisplay";
+import WeatherDisplay from "./weatherDisplay/weatherDisplay";
 
 import { fetchData } from "../utils/index";
 
